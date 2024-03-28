@@ -1,6 +1,7 @@
 class MeuApp:   
     def __init__(self) -> None:
         self.opcao = 0
+        self.listaDeEstudantes = list()
                
     def MenuPrincipal(self):
         while True:    
@@ -46,60 +47,48 @@ class MeuApp:
         
         
     def MenuProfessores(self):
-        while True:
-            print("***** [Professores] Menu de operações *****")
-            print("")
-            print("(1) Incluir.")
-            print("(2) Listar.")
-            print("(3) Atualizar.")
-            print("(4) Excluir.")
-            print("(9) Voltar ao menu principal.")
-            self.opcao = int(input("Informe a ação desejada: "))
-            self.Opcao()
+        print("EM DESENVOLVIMENTO")
+        self.MenuPrincipal()
         
     def MenuDisciplinas(self):
-        while True:   
-            print("***** [Disciplinas] Menu de operações *****")
-            print("")
-            print("(1) Incluir.")
-            print("(2) Listar.")
-            print("(3) Atualizar.")
-            print("(4) Excluir.")
-            print("(9) Voltar ao menu principal.")
-            self.opcao = int(input("Informe a ação desejada: "))
-            self.Opcao()
+        print("EM DESENVOLVIMENTO")
+        self.MenuPrincipal()
         
-    def MenuTurmas(self):
-        while True:    
-            print("***** [Turmas] Menu de operações *****")
-            print("")
-            print("(1) Incluir.")
-            print("(2) Listar.")
-            print("(3) Atualizar.")
-            print("(4) Excluir.")
-            print("(9) Voltar ao menu principal.")
-            self.opcao = int(input("Informe a ação desejada: "))
-            self.Opcao()
+    def MenuTurmas(self):   
+        print("EM DESENVOLVIMENTO")
+        self.MenuPrincipal()
         
     def MenuMatriculas(self):
-        while True:    
-            print("***** [Matriculas] Menu de operações *****")
-            print("")
-            print("(1) Incluir.")
-            print("(2) Listar.")
-            print("(3) Atualizar.")
-            print("(4) Excluir.")
-            print("(9) Voltar ao menu principal.")
-            self.opcao = int(input("Informe a ação desejada: "))
-            self.Opcao()
+        print("EM DESENVOLVIMENTO")
+        self.MenuPrincipal()
         
     def Opcao(self):
-        if self.opcao in [1, 2, 3, 4]:
-            print(f"A opção {self.opcao} é válida \n")
+        if self.opcao == 1:
+            self.incluirEstudantes()
+        if self.opcao == 2:
+            self.listarEstudntes()
+        elif self.opcao in [3,4]:
+            print("EM DESENVOLVIMENTO")
         elif self.opcao == 9:
             self.MenuPrincipal()
         else:
             print(f"A opção {self.opcao} é inválida, tente novamente \n")
-
+            
+    def incluirEstudantes(self):
+        print("\n===== INCLUSÃO =====\n")
+        nomeEstudante = input("Informe o nome do estudante: ")
+        self.listaDeEstudantes.append(nomeEstudante)
+        input("Precione ENTER para continuar\n\n")
+        print(self.listaDeEstudantes)
+        
+    def listarEstudntes(self):
+        print("\n===== LISTAGEM =====\n")
+        if self.listaDeEstudantes:
+            for i, estudante in enumerate(self.listaDeEstudantes, 1):
+                print(f"{i}. {estudante}")
+            input("Precione ENTER para continuar\n\n")
+        else:
+            print("Não há estudantes cadastrados.")
+        
 app = MeuApp()
 app.MenuPrincipal()

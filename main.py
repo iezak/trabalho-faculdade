@@ -1,94 +1,93 @@
-class MeuApp:   
-    def __init__(self) -> None:
-        self.opcao = 0
-        self.listaDeEstudantes = list()
+class MeuApp:   # Define a classe MeuApp.
+    def __init__(self) -> None:  # Define o método de inicialização da classe.
+        self.opcao = 0  # Inicializa a variável opcao como 0.
+        self.listaDeEstudantes = list()  # Inicializa uma lista vazia para armazenar estudantes.
                
-    def MenuPrincipal(self):
-        while True:    
-            print("---- MENU PRINCIPAL ----")
+    def MenuPrincipal(self):  # Define o método MenuPrincipal.
+        while True:    # Loop infinito para exibir o menu principal repetidamente.
+            print("---- MENU PRINCIPAL ----")  # Imprime o título do menu principal.
             print("")
-            print("(1) Gerenciar estudantes.")
-            print("(2) Gerenciar professores.")
-            print("(3) Gerenciar disciplinas.")
-            print("(4) Gerenciar turmas.")
-            print("(5) Gerenciar Matriculas.")
-            print("(9) Sair.")
+            print("(1) Gerenciar estudantes.")  # Opção para gerenciar estudantes.
+            print("(2) Gerenciar professores.")  # Opção para gerenciar professores.
+            print("(3) Gerenciar disciplinas.")  # Opção para gerenciar disciplinas.
+            print("(4) Gerenciar turmas.")  # Opção para gerenciar turmas.
+            print("(5) Gerenciar Matriculas.")  # Opção para gerenciar matrículas.
+            print("(9) Sair.")  # Opção para sair do programa.
             
-            self.opcao = int(input("Informe a opção desejada: "))
-            self.EscolhaOperacao()
+            self.opcao = int(input("Informe a opção desejada: "))  # Solicita a opção do usuário.
+            self.EscolhaOperacao()  # Chama o método EscolhaOperacao.
         
-    def EscolhaOperacao(self):
-        if self.opcao == 1:
-            self.MenuEstudantes()
-        elif self.opcao == 2:
-            self.MenuProfessores()
-        elif self.opcao == 3:
-            self.MenuDisciplinas()
-        elif self.opcao == 4:
-            self.MenuTurmas()
-        elif self.opcao == 5:
-            self.MenuMatriculas()
-        elif self.opcao == 9:
-            quit()
-        else:
-            print(f"A opção {self.opcao} é inválida, tente novamente")
+    def EscolhaOperacao(self):  # Define o método EscolhaOperacao.
+        if self.opcao == 1:  # Se a opção selecionada for 1:
+            self.MenuEstudantes()  # Chama o método MenuEstudantes.
+        elif self.opcao == 2:  # Se a opção selecionada for 2:
+            self.MenuProfessores()  # Chama o método MenuProfessores.
+        elif self.opcao == 3:  # Se a opção selecionada for 3:
+            self.MenuDisciplinas()  # Chama o método MenuDisciplinas.
+        elif self.opcao == 4:  # Se a opção selecionada for 4:
+            self.MenuTurmas()  # Chama o método MenuTurmas.
+        elif self.opcao == 5:  # Se a opção selecionada for 5:
+            self.MenuMatriculas()  # Chama o método MenuMatriculas.
+        elif self.opcao == 9:  # Se a opção selecionada for 9:
+            quit()  # Sai do programa.
+        else:  # Se a opção não for válida:
+            print(f"A opção {self.opcao} é inválida, tente novamente")  # Exibe uma mensagem de opção inválida.
         
-    def MenuEstudantes(self):
-        while True:    
-            print('***** [Estudantes] Menu de operações *****')
+    def MenuEstudantes(self):  # Define o método MenuEstudantes.
+        while True:    # Loop infinito para exibir o menu de operações de estudantes repetidamente.
+            print('***** [Estudantes] Menu de operações *****')  # Título do menu de operações de estudantes.
             print("")
-            print("(1) Incluir.")
-            print("(2) Listar.")
-            print("(3) Atualizar.")
-            print("(4) Excluir.")
-            print("(9) Voltar ao menu principal.")  
-            self.opcao = int(input("Informe a ação desejada: "))
-            self.Opcao()
+            print("(1) Incluir.")  # Opção para incluir um estudante.
+            print("(2) Listar.")  # Opção para listar os estudantes.
+            print("(3) Atualizar.")  # Opção para atualizar os dados de um estudante.
+            print("(4) Excluir.")  # Opção para excluir um estudante.
+            print("(9) Voltar ao menu principal.")  # Opção para voltar ao menu principal.  
+            self.opcao = int(input("Informe a ação desejada: "))  # Solicita a opção do usuário.
+            self.Opcao()  # Chama o método Opcao.
         
         
-    def MenuProfessores(self):
-        print("EM DESENVOLVIMENTO")
-        self.MenuPrincipal()
+    def MenuProfessores(self):  # Define o método MenuProfessores.
+        print("EM DESENVOLVIMENTO")  # Exibe uma mensagem indicando que a funcionalidade está em desenvolvimento.
+        self.MenuPrincipal()  # Retorna ao menu principal.
         
-    def MenuDisciplinas(self):
-        print("EM DESENVOLVIMENTO")
-        self.MenuPrincipal()
+    def MenuDisciplinas(self):  # Define o método MenuDisciplinas.
+        print("EM DESENVOLVIMENTO")  # Exibe uma mensagem indicando que a funcionalidade está em desenvolvimento.
+        self.MenuPrincipal()  # Retorna ao menu principal.
         
-    def MenuTurmas(self):   
-        print("EM DESENVOLVIMENTO")
-        self.MenuPrincipal()
+    def MenuTurmas(self):   # Define o método MenuTurmas.
+        print("EM DESENVOLVIMENTO")  # Exibe uma mensagem indicando que a funcionalidade está em desenvolvimento.
+        self.MenuPrincipal()  # Retorna ao menu principal.
         
-    def MenuMatriculas(self):
-        print("EM DESENVOLVIMENTO")
-        self.MenuPrincipal()
+    def MenuMatriculas(self):  # Define o método MenuMatriculas.
+        print("EM DESENVOLVIMENTO")  # Exibe uma mensagem indicando que a funcionalidade está em desenvolvimento.
+        self.MenuPrincipal()  # Retorna ao menu principal.
         
-    def Opcao(self):
-        if self.opcao == 1:
-            self.incluirEstudantes()
-        if self.opcao == 2:
-            self.listarEstudntes()
-        elif self.opcao in [3,4]:
-            print("EM DESENVOLVIMENTO")
-        elif self.opcao == 9:
-            self.MenuPrincipal()
-        else:
-            print(f"A opção {self.opcao} é inválida, tente novamente \n")
+    def Opcao(self):  # Define o método Opcao.
+        if self.opcao == 1:  # Se a opção selecionada for 1:
+            self.incluirEstudantes()  # Chama o método incluirEstudantes.
+        if self.opcao == 2:  # Se a opção selecionada for 2:
+            self.listarEstudntes()  # Chama o método listarEstudntes.
+        elif self.opcao in [3,4]:  # Se a opção selecionada for 3 ou 4:
+            print("EM DESENVOLVIMENTO")  # Exibe uma mensagem indicando que a funcionalidade está em desenvolvimento.
+        elif self.opcao == 9:  # Se a opção selecionada for 9:
+            self.MenuPrincipal()  # Retorna ao menu principal.
+        else:  # Se a opção não for válida:
+            print(f"A opção {self.opcao} é inválida, tente novamente \n")  # Exibe uma mensagem de opção inválida.
             
-    def incluirEstudantes(self):
-        print("\n===== INCLUSÃO =====\n")
-        nomeEstudante = input("Informe o nome do estudante: ")
-        self.listaDeEstudantes.append(nomeEstudante)
-        input("Precione ENTER para continuar\n\n")
-        print(self.listaDeEstudantes)
+    def incluirEstudantes(self):  # Define o método incluirEstudantes.
+        print("\n===== INCLUSÃO =====\n")  # Título da seção de inclusão.
+        nomeEstudante = input("Informe o nome do estudante: ")  # Solicita o nome do estudante.
+        self.listaDeEstudantes.append(nomeEstudante)  # Adiciona o estudante à lista de estudantes.
+        input("Precione ENTER para continuar\n\n")  # Aguarda a entrada do usuário.
+                
+    def listarEstudntes(self):  # Define o método listarEstudntes.
+        print("\n===== LISTAGEM =====\n")  # Título da seção de listagem.
+        if self.listaDeEstudantes:  # Se houver estudantes na lista:
+            for i, estudante in enumerate(self.listaDeEstudantes, 1):  # Itera sobre a lista de estudantes.
+                print(f"{i}. {estudante}")  # Exibe o número e o nome do estudante.
+            input("Precione ENTER para continuar\n\n")  # Aguarda a entrada do usuário.
+        else:  # Se não houver estudantes cadastrados:
+            print("Não há estudantes cadastrados.")  # Exibe uma mensagem indicando a ausência de estudantes.
         
-    def listarEstudntes(self):
-        print("\n===== LISTAGEM =====\n")
-        if self.listaDeEstudantes:
-            for i, estudante in enumerate(self.listaDeEstudantes, 1):
-                print(f"{i}. {estudante}")
-            input("Precione ENTER para continuar\n\n")
-        else:
-            print("Não há estudantes cadastrados.")
-        
-app = MeuApp()
-app.MenuPrincipal()
+app = MeuApp()  # Instancia um objeto da classe MeuApp.
+app.MenuPrincipal()  # Chama o método MenuPrincipal para iniciar o programa.

@@ -76,9 +76,14 @@ class MeuApp:   # Define a classe MeuApp.
             
     def incluirEstudantes(self):  # Define o método incluirEstudantes.
         print("\n===== INCLUSÃO =====\n")  # Título da seção de inclusão.
-        nomeEstudante = input("Informe o nome do estudante: ")  # Solicita o nome do estudante.
-        self.listaDeEstudantes.append(nomeEstudante)  # Adiciona o estudante à lista de estudantes.
-        input("Precione ENTER para continuar\n\n")  # Aguarda a entrada do usuário.
+        while True:
+            nomeEstudante = str(input("Informe o nome do estudante: "))  # Solicita o nome do estudante.
+            if nomeEstudante.isalpha() :
+                self.listaDeEstudantes.append(nomeEstudante)  # Adiciona o estudante à lista de estudantes.
+                input("Precione ENTER para continuar\n\n")  # Aguarda a entrada do usuário.
+                break
+            else : 
+                print("Insira um nome válido")
                 
     def listarEstudntes(self):  # Define o método listarEstudntes.
         print("\n===== LISTAGEM =====\n")  # Título da seção de listagem.

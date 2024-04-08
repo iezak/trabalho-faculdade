@@ -14,8 +14,12 @@ class MeuApp:   # Define a classe MeuApp.
             print("(5) Gerenciar Matriculas.")  # Opção para gerenciar matrículas.
             print("(9) Sair.")  # Opção para sair do programa.
             
-            self.opcao = int(input("Informe a opção desejada: "))  # Solicita a opção do usuário.
-            self.EscolhaOperacao()  # Chama o método EscolhaOperacao.
+            self.opcao = input("Informe a opção desejada: ")  # Solicita a opção do usuário.
+            if self.opcao.isdigit():
+                self.opcao = int(self.opcao)
+                self.EscolhaOperacao()  # Chama o método EscolhaOperacao.
+            else:
+                print("Opção invalida, entre com um mumero")
         
     def EscolhaOperacao(self):  # Define o método EscolhaOperacao.
         if self.opcao == 1:  # Se a opção selecionada for 1:
@@ -42,8 +46,12 @@ class MeuApp:   # Define a classe MeuApp.
             print("(3) Atualizar.")  # Opção para atualizar os dados de um estudante.
             print("(4) Excluir.")  # Opção para excluir um estudante.
             print("(9) Voltar ao menu principal.")  # Opção para voltar ao menu principal.  
-            self.opcao = int(input("Informe a ação desejada: "))  # Solicita a opção do usuário.
-            self.Opcao()  # Chama o método Opcao.
+            self.opcao = (input("Informe a ação desejada: "))  # Solicita a opção do usuário.
+            if self.opcao.isdigit():
+                self.opcao = int(self.opcao)
+                self.Opcao()  # Chama o método EscolhaOperacao.
+            else:
+                print("Opção invalida, entre com um mumero ")
         
         
     def MenuProfessores(self):  # Define o método MenuProfessores.

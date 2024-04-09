@@ -94,13 +94,13 @@ class MeuApp:
             print(f"A opção {self.opcao} é inválida, tente novamente \n")
 
     def incluirEstudantes(self):
-        # Método para incluir estudantes na lista
+    # Método para incluir estudantes na lista
         print("\n===== INCLUSÃO =====\n")
         while True:
-            nomeEstudante = str(input("Informe o nome do estudante: "))
-            if nomeEstudante.isalpha():
+            nomeEstudante = input("Informe o nome do estudante: ")
+            if nomeEstudante.replace(" ", "").isalpha():
                 self.listaDeEstudantes.append(nomeEstudante)
-                input("Precione ENTER para continuar\n\n")
+                input("Pressione ENTER para continuar\n\n")
                 break
             else:
                 print("Insira um nome válido")

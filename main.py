@@ -97,6 +97,21 @@ class MeuApp:
             self.MenuPrincipal()
         else:
             print(f"A opção {self.opcao} é inválida, tente novamente \n")
+            
+    def validar_dados_estudante(self, nome, cpf, codigo=None):
+        if not (nome.replace(" ", "").isalpha() and cpf.isdigit()):
+            print("Erro na digitação, tente novamente.")
+            return False
+        if codigo is not None and not codigo.isdigit():
+            print("Código deve ser um número inteiro.")
+            return False
+        if codigo is not None and codigo in self.estudantes:
+            print(f"Codigo({codigo} já cadastrado.)")
+            return False
+        if cpf in [dados['cpf'] for dados in self.estudantes.values()]:
+            print(f"CPF({cpf} já cadastrado.)")
+            return False
+        return True
 
     def incluirEstudantes(self):
         # Método para incluir estudantes na lista
@@ -106,17 +121,12 @@ class MeuApp:
             nomeEstudante = input("Insira o nome do estudante: ")
             cpfEstudante = input("Insira o CPF do estudante: ")
             
-            # Verifica se o nome, código e CPF são válidos e únicos
-            if nomeEstudante.replace(" ", "").isalpha() and codigoEstudante.isdigit() and cpfEstudante.isdigit():
-                if codigoEstudante not in self.estudantes and cpfEstudante not in [dados['cpf'] for dados in self.estudantes.values()]:
-                    self.estudantes[codigoEstudante] = {'nome': nomeEstudante, 'cpf': cpfEstudante}
-                    if input("Gostaria de cadastrar mais um estudante (s/n)") == "n":
-                        break
-                else:
-                    print("Código ou CPF já cadastrado")
-            else:
-                print("Erro de caracter, tente novamente.")
-
+            if self.validar_dados_estudante(nomeEstudante, codigoEstudante, cpfEstudante):
+            
+                self.estudantes[codigoEstudante] = {'nome': nomeEstudante, 'cpf': cpfEstudante}
+                if input("Gostaria de cadastrar mais um estudante (s/n)") == "n":
+                    break
+            
     def listarEstudantes(self):
         # Método para listar estudantes cadastrados
         print("\n===== LISTAGEM =====\n")
@@ -145,33 +155,22 @@ class MeuApp:
         print("\n===== EDIÇÃO =====\n")
         while True:
             codigo = input("Insira o código do estudante para a edição: ")
-            if codigo.isdigit():
-                if codigo in self.estudantes:
-                    print("Digite os novos detalhes do estudante:")
-                    novoNome = input("Novo nome (deixe em branco para manter o mesmo): ")
-                    novoCPF = input("Novo CPF (deixe em branco para manter o mesmo): ")
-
-                    # Se o novo CPF for diferente do CPF atual e já estiver associado a outro estudante, mostra um erro
-                    if novoCPF.strip() == "":
-                        novoCPF = self.estudantes[codigo]['cpf']
-                    if novoNome.strip() == "":
-                        novoNome = self.estudantes[codigo]['nome']
-                    elif novoCPF != self.estudantes[codigo]['cpf'] and novoCPF in [dados['cpf'] for dados in self.estudantes.values() if dados['cpf'] != self.estudantes[codigo]['cpf']]:
-                        print("Erro: O CPF fornecido já está associado a outro estudante.")
-                        continue
-
+            estudante = self.estudantes.get(codigo)
+            if estudante:
+                print("Digite os novos dados do estudante.")
+                novoNome = input(f"Novo nome ({estudante['nome']}): ").strip() or estudante['nome']
+                novoCpf = input(f"Novo cpf ({estudante['cpf']}): ").strip() or estudante['cpf']
+                
+                if self.validar_dados_estudante(novoNome, novoCpf):
                     # Atualiza os dados do estudante
-                    self.estudantes[codigo]['nome'] = novoNome
-                    self.estudantes[codigo]['cpf'] = novoCPF
+                    estudante['nome'] = novoNome
+                    estudante['cpf'] = novoCpf
                     print(f"Dados do estudante com código {codigo} atualizados com sucesso.")
                     break
-                else:
-                    print(f"Estudante com código {codigo} não encontrado.")
-                    print("Não há estudantes cadastrados.")
-                    break
             else:
-                print("Erro: O código deve ser numérico.")
-
+                print("Estudante não encontrado. Verifique se digitou corretamente o código.")
+                
+                
 # Instanciação da classe e início do aplicativo
 app = MeuApp()
 app.MenuPrincipal()

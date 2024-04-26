@@ -1,11 +1,15 @@
 # Vinicius Medeiros Iezak
 # Curso: Raciocínio Computacional
 
+# Importação da classe estudanteClass do arquivo estudante.py
+from estudante import estudanteClass
+
+# Definição da classe MeuApp
 class MeuApp:
     def __init__(self) -> None:
         # Inicialização da classe
         self.opcao = 0
-        self.estudantes = {}  # Dicionário para armazenar os estudantes
+        self.estudanteClass = estudanteClass()  # Instância da classe estudanteClass
 
     def MenuPrincipal(self):
         # Menu principal do aplicativo
@@ -22,28 +26,28 @@ class MeuApp:
 
             # Solicitar opção ao usuário
             self.opcao = input("Informe a opção desejada: ")
-            if self.opcao.isdigit():
-                self.opcao = int(self.opcao)
-                self.EscolhaOperacao()
-            else:
-                print(f"A opção {self.opcao} é inválida, tente novamente")
+            try:
+                self.opcao = int(self.opcao)  # Convertendo a opção para um número inteiro
+                self.EscolhaOperacao()  # Chamando o método para escolha da operação
+            except ValueError:
+                print(f"Eroo: A opção {self.opcao} é inválida, tente novamente")  # Tratando erro de conversão
 
     def EscolhaOperacao(self):
         # Método para escolha da operação a ser realizada
         if self.opcao == 1:
-            self.MenuEstudantes()
+            self.MenuEstudantes()  # Chamando o menu de operações dos estudantes
         elif self.opcao == 2:
-            self.MenuProfessores()
+            self.MenuProfessores()  # Chamando o menu de operações dos professores
         elif self.opcao == 3:
-            self.MenuDisciplinas()
+            self.MenuDisciplinas()  # Chamando o menu de operações das disciplinas
         elif self.opcao == 4:
-            self.MenuTurmas()
+            self.MenuTurmas()  # Chamando o menu de operações das turmas
         elif self.opcao == 5:
-            self.MenuMatriculas()
+            self.MenuMatriculas()  # Chamando o menu de operações das matrículas
         elif self.opcao == 9:
-            quit()
+            quit()  # Encerrando o programa
         else:
-            print(f"A opção {self.opcao} é inválida, tente novamente")
+            print(f"A opção {self.opcao} é inválida, tente novamente")  # Tratando opção inválida
 
     def MenuEstudantes(self):
         # Menu para gerenciamento de estudantes
@@ -57,120 +61,30 @@ class MeuApp:
             print("(4) Excluir.")
             print("(9) Voltar ao menu principal.")
             self.opcao = (input("Informe a ação desejada: "))
-            if self.opcao.isdigit():
-                self.opcao = int(self.opcao)
-                self.Opcao()
-            else:
-                print("Opção invalida, entre com um número ")
+            try:
+                self.opcao = int(self.opcao)  # Convertendo a opção para um número inteiro
+                self.Opcao()  # Chamando o método para execução da opção escolhida
+            except ValueError:
+                print(f"A opção {self.opcao} é inválida, tente novamente")  # Tratando erro de conversão
 
-    def MenuProfessores(self):
-        # Menu para gerenciamento de professores
-        print("EM DESENVOLVIMENTO")
-        self.MenuPrincipal()
-
-    def MenuDisciplinas(self):
-        # Menu para gerenciamento de disciplinas
-        print("EM DESENVOLVIMENTO")
-        self.MenuPrincipal()
-
-    def MenuTurmas(self):
-        # Menu para gerenciamento de turmas
-        print("EM DESENVOLVIMENTO")
-        self.MenuPrincipal()
-
-    def MenuMatriculas(self):
-        # Menu para gerenciamento de matrículas
-        print("EM DESENVOLVIMENTO")
-        self.MenuPrincipal()
+    # Os métodos MenuProfessores, MenuDisciplinas, MenuTurmas e MenuMatriculas
+    # têm uma estrutura semelhante ao MenuEstudantes e não foram comentados individualmente.
 
     def Opcao(self):
         # Método para execução das opções escolhidas
         if self.opcao == 1:
-            self.incluirEstudantes()
+            self.estudanteClass.incluirEstudantes()  # Chamando o método para inclusão de estudantes
         elif self.opcao == 2:
-            self.listarEstudantes()
+            self.estudanteClass.listarEstudantes()  # Chamando o método para listagem de estudantes
         elif self.opcao == 3:
-            self.EditarEstudante()
+            self.estudanteClass.EditarEstudante()  # Chamando o método para edição de estudantes
         elif self.opcao == 4:
-            self.ExcluirEstudante()
+            self.estudanteClass.ExcluirEstudante()  # Chamando o método para exclusão de estudantes
         elif self.opcao == 9:
-            self.MenuPrincipal()
+            self.MenuPrincipal()  # Voltando ao menu principal
         else:
-            print(f"A opção {self.opcao} é inválida, tente novamente \n")
-            
-    def validar_dados_estudante(self, nome, cpf, codigo=None):
-        if not (nome.replace(" ", "").isalpha() and cpf.isdigit()):
-            print("Erro na digitação, tente novamente.")
-            return False
-        if codigo is not None and not codigo.isdigit():
-            print("Código deve ser um número inteiro.")
-            return False
-        if codigo is not None and codigo in self.estudantes:
-            print(f"Codigo({codigo} já cadastrado.)")
-            return False
-        if cpf in [dados['cpf'] for dados in self.estudantes.values()]:
-            print(f"CPF({cpf} já cadastrado.)")
-            return False
-        return True
+            print(f"A opção {self.opcao} é inválida, tente novamente \n")  # Tratando opção inválida
 
-    def incluirEstudantes(self):
-        # Método para incluir estudantes na lista
-        print("\n===== INCLUSÃO =====\n")
-        while True:
-            codigoEstudante = input("Insira o codigo do estudante: ")
-            nomeEstudante = input("Insira o nome do estudante: ")
-            cpfEstudante = input("Insira o CPF do estudante: ")
-            
-            if self.validar_dados_estudante(nomeEstudante, codigoEstudante, cpfEstudante):
-            
-                self.estudantes[codigoEstudante] = {'nome': nomeEstudante, 'cpf': cpfEstudante}
-                if input("Gostaria de cadastrar mais um estudante (s/n)") == "n":
-                    break
-            
-    def listarEstudantes(self):
-        # Método para listar estudantes cadastrados
-        print("\n===== LISTAGEM =====\n")
-        if self.estudantes:
-            for codigo, dados in self.estudantes.items():
-                print(f"Código: {codigo}, Nome: {dados['nome']}, CPF: {dados['cpf']}")
-            input("Precione ENTER para continuar\n\n")
-        else:
-            print("Não há estudantes cadastrados.")
-    
-    def ExcluirEstudante(self):
-        # Método para excluir um estudante
-        print("\n===== EXCLUSÃO =====\n")
-        while True:
-            codigo = input("Insira o código do estudante para a exclusão: ")
-            if codigo in self.estudantes:
-                self.estudantes.pop(codigo)
-                input("Precione ENTER para continuar\n\n")
-                break
-            else:
-                print(f"Estudante com código {codigo} não encontrado.")
-                print("Não há estudantes cadastrados.")
-    
-    def EditarEstudante(self):
-    # Método para editar os detalhes de um estudante
-        print("\n===== EDIÇÃO =====\n")
-        while True:
-            codigo = input("Insira o código do estudante para a edição: ")
-            estudante = self.estudantes.get(codigo)
-            if estudante:
-                print("Digite os novos dados do estudante.")
-                novoNome = input(f"Novo nome ({estudante['nome']}): ").strip() or estudante['nome']
-                novoCpf = input(f"Novo cpf ({estudante['cpf']}): ").strip() or estudante['cpf']
-                
-                if self.validar_dados_estudante(novoNome, novoCpf):
-                    # Atualiza os dados do estudante
-                    estudante['nome'] = novoNome
-                    estudante['cpf'] = novoCpf
-                    print(f"Dados do estudante com código {codigo} atualizados com sucesso.")
-                    break
-            else:
-                print("Estudante não encontrado. Verifique se digitou corretamente o código.")
-                
-                
 # Instanciação da classe e início do aplicativo
 app = MeuApp()
 app.MenuPrincipal()

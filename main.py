@@ -2,17 +2,17 @@
 # Curso: Raciocínio Computacional
 
 # Importação da classe estudanteClass do arquivo estudante.py
-from estudante import estudanteClass
+from editor import Editor
 
 # Definição da classe MeuApp
 class MeuApp:
     def __init__(self) -> None:
         # Inicialização da classe
         self.opcao = 0
-        self.estudanteClass = estudanteClass()  # Instância da classe estudanteClass
+        self.entidade = ""
 
+    # Menu principal do aplicativo
     def MenuPrincipal(self):
-        # Menu principal do aplicativo
         while True:
             print("---- MENU PRINCIPAL ----")
             print("")
@@ -35,56 +35,91 @@ class MeuApp:
     def EscolhaOperacao(self):
         # Método para escolha da operação a ser realizada
         if self.opcao == 1:
-            self.MenuEstudantes()  # Chamando o menu de operações dos estudantes
+            self.entidade = "estudante"
+            self.MenuSecundario()  # Chamando o menu de operações dos estudantes
         elif self.opcao == 2:
-            self.MenuProfessores()  # Chamando o menu de operações dos professores
+            self.entidade = "professor"
+            self.MenuSecundario()  # Chamando o menu de operações dos professores
         elif self.opcao == 3:
-            self.MenuDisciplinas()  # Chamando o menu de operações das disciplinas
+            self.entidade = "disciplina"
+            self.MenuSecundario()  # Chamando o menu de operações das disciplinas
         elif self.opcao == 4:
-            self.MenuTurmas()  # Chamando o menu de operações das turmas
+            self.entidade = "turma"
+            self.MenuSecundario()  # Chamando o menu de operações das turmas
         elif self.opcao == 5:
-            self.MenuMatriculas()  # Chamando o menu de operações das matrículas
+            self.entidade = "matricula"
+            self.MenuSecundario()  # Chamando o menu de operações das matrículas
         elif self.opcao == 9:
             quit()  # Encerrando o programa
         else:
             print(f"A opção {self.opcao} é inválida, tente novamente")  # Tratando opção inválida
 
-    def MenuEstudantes(self):
+    def MenuSecundario(self):
         # Menu para gerenciamento de estudantes
         while True:
-            print('***** [Estudantes] Menu de operações *****')
-            print("")
+            print(F'\n***** [{self.entidade}] Menu de operações *****\n')
             # Opções do menu de estudantes
             print("(1) Incluir.")
             print("(2) Listar.")
             print("(3) Atualizar.")
             print("(4) Excluir.")
             print("(9) Voltar ao menu principal.")
-            self.opcao = (input("Informe a ação desejada: "))
+            self.opcao_secundaria = (input("Informe a ação desejada: "))
             try:
-                self.opcao = int(self.opcao)  # Convertendo a opção para um número inteiro
-                self.Opcao()  # Chamando o método para execução da opção escolhida
+                opcao_secundaria = int(self.opcao_secundaria)  # Convertendo a opção para um número inteiro
+                self.Opcao(opcao_secundaria)  # Chamando o método para execução da opção escolhida
             except ValueError:
-                print(f"A opção {self.opcao} é inválida, tente novamente")  # Tratando erro de conversão
+                print(f"A opção {self.opcao_secundaria} é inválida, tente novamente")  # Tratando erro de conversão
 
-    # Os métodos MenuProfessores, MenuDisciplinas, MenuTurmas e MenuMatriculas
-    # têm uma estrutura semelhante ao MenuEstudantes e não foram comentados individualmente.
-
-    def Opcao(self):
+    def Opcao(self, opcao_secundaria):
+        editor = Editor()
         # Método para execução das opções escolhidas
-        if self.opcao == 1:
-            self.estudanteClass.incluirEstudantes()  # Chamando o método para inclusão de estudantes
-        elif self.opcao == 2:
-            self.estudanteClass.listarEstudantes()  # Chamando o método para listagem de estudantes
-        elif self.opcao == 3:
-            self.estudanteClass.EditarEstudante()  # Chamando o método para edição de estudantes
-        elif self.opcao == 4:
-            self.estudanteClass.ExcluirEstudante()  # Chamando o método para exclusão de estudantes
-        elif self.opcao == 9:
+        if opcao_secundaria == 1:
+            if self.entidade == 'professor' or self.entidade == 'estudante':
+                editor.incluirPessoa(self.entidade)  # Chamando o método para inclusão de estudantes
+            if self.entidade == 'disciplina':
+                editor.incluirDiciplina(self.entidade)
+            if self.entidade == 'turma':
+                editor.incluirTurma(self.entidade)
+            if self.entidade == 'matricula':
+                editor.incluirMatricula(self.entidade)
+                
+        elif opcao_secundaria == 2:
+            if self.entidade == 'estudante' or self.entidade == 'professor':
+                editor.listarPessoa(self.entidade)  # Chamando o método para inclusão de estudantes
+            if self.entidade == 'disciplina':
+                editor.listarDiciplinas(self.entidade)
+            if self.entidade == 'turma':
+                editor.listarTurmas(self.entidade)
+            if self.entidade == 'matricula':
+                editor.listarMatriculas(self.entidade)
+                print()
+        elif opcao_secundaria == 3:
+            if self.entidade == 'estudante' or self.entidade == 'professor':
+                editor.editarPessoa(self.entidade)  # Chamando o método para inclusão de estudantes
+            if self.entidade == 'disciplina':
+                editor.editarDiciplina(self.entidade)
+            if self.entidade == 'turma':
+                editor.editarTurma(self.entidade)
+            if self.entidade == 'matricula':
+                editor.editarMatricula(self.entidade)
+                print()
+        elif opcao_secundaria == 4:
+            if self.entidade == 'estudante' or self.entidade == 'professor':
+                editor.excluirPessoa(self.entidade)  # Chamando o método para inclusão de estudantes
+            if self.entidade == 'disciplina':
+                editor.excluirDiciplina(self.entidade)
+            if self.entidade == 'turma':
+                editor.excluirTurma(self.entidade)
+            if self.entidade == 'matricula':
+                editor.excluirMatricula(self.entidade)
+                print()
+        elif opcao_secundaria == 9:
             self.MenuPrincipal()  # Voltando ao menu principal
         else:
-            print(f"A opção {self.opcao} é inválida, tente novamente \n")  # Tratando opção inválida
+            print(f"A opção {opcao_secundaria} é inválida, tente novamente \n")  # Tratando opção inválida
 
 # Instanciação da classe e início do aplicativo
 app = MeuApp()
 app.MenuPrincipal()
+
